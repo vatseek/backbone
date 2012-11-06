@@ -1,0 +1,25 @@
+* {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+}
+
+ul {
+    padding-left: 10px;
+}
+
+ul li.item {
+    list-style-type: none;
+    padding-bottom: 10px;
+}
+
+li.item img, li.item span.name{
+    cursor: pointer;
+}
+
+#game {
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    width: 240px;
+    border: 1px solid #000;
+}
