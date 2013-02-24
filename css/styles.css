@@ -19,6 +19,10 @@ li.item img, li.item span.name{
     cursor: pointer;
 }
 
+span.name {
+    display: block;
+}
+
 #game {
     position: absolute;
     top: 10px;

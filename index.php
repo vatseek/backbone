@@ -11,9 +11,9 @@
 <div id="game"></div>
 
 <script type="text/template" id="item-template">
-    <li class="item"><img src="image/<%= thumb %>">
-        <span class="name"><%= name %></span>
-        <!--ul>< %= subitem %></ul-->
+    <li class="item">
+        <span class="name"><img src="image/<%= thumb %>"><%= name %></span>
+        <ul><%=subitem %></ul>
     </li>
 </script>
 
