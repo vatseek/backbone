@@ -37,13 +37,8 @@ var GameView = Backbone.View.extend({
 
 var GameItemView = Backbone.View.extend({
     template: _.template($('#item-template').html()),
-    events: {
-        'click':'eClick'
-    },
-    eClick: function(event) {
-        console.log(event.target);
-    },
     render : function() {
+        //console.log(this.model.toJSON());
         $(this.el).html(this.template(this.model.toJSON()));
         return this;
     }
@@ -55,6 +50,7 @@ var AppRouter = Backbone.Router.extend({
     },
     list:function () {
         this.itemList = new GamesCollection();
+        console.log(this.itemList);
         this.itemListView = new GameView({model:this.itemList});
         $('#game').html(this.itemListView.render().el);
     }
@@ -64,10 +60,8 @@ jQuery(document).ready(function(){
     $.ajax({
         url: "api/bookmark"
     }).success(function( response ) {
-        window.collectionItem = jQuery.parseJSON(response);
-        var app = new AppRouter();
-        Backbone.history.start();
-    });
+            window.collectionItem = jQuery.parseJSON(response);
+            var app = new AppRouter();
+            Backbone.history.start();
+        });
 });
-
-

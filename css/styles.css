@@ -9,7 +9,10 @@ ul {
 
 ul li.item {
     list-style-type: none;
-    padding-bottom: 10px;
+}
+
+ul li.item:hover {
+    /*background: #aaaacc;*/
 }
 
 li.item img, li.item span.name{

@@ -3,7 +3,7 @@ var Game = Backbone.Model.extend({
     },
     defaults: {
         folder_id: "0",
-        name: "name",
+        name: "root",
         order: "0",
         parent_id: "0",
         thumb: "folder.png",
@@ -24,13 +24,11 @@ var GamesCollection = Backbone.Collection.extend({
 var GameView = Backbone.View.extend({
     tagName:'ul',
     initialize:function () {
-        this.model.bind("reset", this.render, this);
+        //this.model.bind("reset", this.render, this);
     },
 
     render:function (eventName) {
-        _.each(this.model.models, function (items) {
-            $(this.el).append(new GameItemView({model:items}).render().el);
-        }, this);
+        $(this.el).append(new GameItemView({model:new Game, collection: this.model.models}).render());
         return this;
     }
 });
@@ -38,14 +36,24 @@ var GameView = Backbone.View.extend({
 var GameItemView = Backbone.View.extend({
     template: _.template($('#item-template').html()),
     events: {
-        'click':'eClick'
+        'click': 'eClick'
     },
-    eClick: function(event) {
-        console.log(event.target);
-    },
+
     render : function() {
-        $(this.el).html(this.template(this.model.toJSON()));
-        return this;
+        var oModel = this.model;
+        var oCollection = this.collection;
+        oModel.set('subitem', '');
+        _.each(oCollection, function(item){
+            if ( oModel.get('folder_id') == item.get('parent_id')) {
+                oModel.set('subitem', oModel.get('subitem') + new GameItemView({model:item, collection: oCollection}).render());
+            }
+        });
+
+        return this.template(oModel.toJSON());
+    },
+
+    eClick: function() {
+        alert('123');
     }
 });
 
@@ -64,10 +72,8 @@ jQuery(document).ready(function(){
     $.ajax({
         url: "api/bookmark"
     }).success(function( response ) {
-        window.collectionItem = jQuery.parseJSON(response);
-        var app = new AppRouter();
-        Backbone.history.start();
-    });
+            window.collectionItem = jQuery.parseJSON(response);
+            var app = new AppRouter();
+            Backbone.history.start();
+        });
 });
-
-

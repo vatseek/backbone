@@ -18,7 +18,7 @@ $app->run();
 
 function getBookmarks()
 {
-    $sql = "select * FROM `folder` WHERE user_id = '1'; ";
+    $sql = "select * FROM `folder` WHERE user_id = '0'; ";
     try {
         $db = getConnection();
         $stmt = $db->query($sql);
@@ -34,7 +34,7 @@ function getConnection() {
     $dbhost="127.0.0.1";
     $dbuser="user";
     $dbpass="";
-    $dbname="bookmark";
+    $dbname="bone_co";
     $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $dbh;
