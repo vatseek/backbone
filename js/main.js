@@ -42,6 +42,9 @@ var GameItemView = Backbone.View.extend({
     render : function() {
         var oModel = this.model;
         var oCollection = this.collection;
+
+        console.log(oCollection);
+
         oModel.set('subitem', '');
         _.each(oCollection, function(item){
             if ( oModel.get('folder_id') == item.get('parent_id')) {
@@ -53,7 +56,7 @@ var GameItemView = Backbone.View.extend({
     },
 
     eClick: function() {
-        alert('123');
+
     }
 });
 

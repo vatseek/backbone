@@ -1,32 +1,23 @@
-* {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 12px;
+.main-container {
+    margin-top: 75px;
 }
 
-ul {
-    padding-left: 10px;
+#game ul li {
+    list-style: none;
 }
 
-ul li.item {
-    list-style-type: none;
+#game ul {
+    padding-left: 0;
 }
 
-ul li.item:hover {
-    /*background: #aaaacc;*/
+#game ul > li > ul{
+    padding-left: 24px;
 }
 
-li.item img, li.item span.name{
+#game li span.name.folder {
+    background: url('../image/folder.png') no-repeat;
+    padding: 6px 0 4px 36px;
+    margin-bottom: 3px;
+    display: inline-block;
     cursor: pointer;
-}
-
-span.name {
-    display: block;
-}
-
-#game {
-    position: absolute;
-    top: 10px;
-    bottom: 10px;
-    width: 240px;
-    border: 1px solid #000;
 }
