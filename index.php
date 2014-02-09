@@ -52,7 +52,9 @@
     <div class="row row-offcanvas row-offcanvas-right">
 
         <div class="col-sm-4 hidden-xs" id="sidebar" role="navigation">
-            <div class="list-group" id="game"><!-- tree list --></div>
+            <div class="list-group" id="folder-tree">
+
+            </div>
         </div><!--/span-->
         <div class="col-xs-12 col-sm-8">
             <div class="row">
@@ -88,9 +90,12 @@
 <script src="offcanvas.js"></script>
 
 <script type="text/template" id="item-template">
-    <li class="item">
-        <span class="name folder"><!--img src="/image/<%= thumb %>"--><%= name %></span>
-        <ul><%=subitem %></ul>
+    <li class="node e_open <% if(is_last){ %>is_last<% } %> <% if(!subitem.length){ %>e_leaf<% } %>">
+        <div class="expand"></div>
+        <a class="content" href"#item/<%= folder_id %>"><%= name %></a>
+        <% if(subitem){ %>
+            <ul class="contain"><%=subitem %></ul>
+        <% } %>
     </li>
 </script>
 
@@ -101,3 +106,42 @@
 
 </body>
 </html>
+
+<?php /* ?>
+<ul class="contain">
+    <li class="node is_root e_open">
+        <div class="expand"></div>
+        <a class="content" href="#">test</a>
+        <ul class="contain">
+            <li class="node e_open">
+                <div class="expand"></div>
+                <a class="content" href="#">test</a>
+                <ul class="contain">
+                    <li class="node e_leaf is_last">
+                        <div class="expand"></div>
+                        <a class="content" href="#">test</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="node e_leaf is_last">
+                <div class="expand"></div>
+                <a class="content" href="#">test</a>
+            </li>
+        </ul>
+    </li>
+    <li class="node is_root e_open is_last">
+        <div class="expand"></div>
+        <a class="content" href="#">test</a>
+        <ul class="contain">
+            <li class="node e_leaf">
+                <div class="expand"></div>
+                <a class="content" href="#">test</a>
+            </li>
+            <li class="node e_leaf is_last">
+                <div class="expand"></div>
+                <a class="content" href="#">test</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+ <?php */ ?>

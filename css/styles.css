@@ -1,23 +1,121 @@
-.main-container {
+ .main-container {
     margin-top: 75px;
 }
 
-#game ul li {
-    list-style: none;
+/* #folder-tree ul li {
+ list-style: none;
 }
 
-#game ul {
-    padding-left: 0;
+#folder-tree ul {
+ padding-left: 0;
 }
 
-#game ul > li > ul{
-    padding-left: 24px;
+#folder-tree ul > li > ul{
+ padding-left: 24px;
 }
 
-#game li span.name.folder {
-    background: url('../image/folder.png') no-repeat;
-    padding: 6px 0 4px 36px;
-    margin-bottom: 3px;
-    display: inline-block;
-    cursor: pointer;
-}
+#folder-tree li span.name.folder {
+ background: url('../image/folder.png') no-repeat;
+ padding: 6px 0 4px 36px;
+ margin-bottom: 3px;
+ display: inline-block;
+ cursor: pointer;
+} */
+
+
+/*#folder-tree ul > li > ul{*/
+    /*padding-left: 16px;*/
+/*}*/
+
+ /*#folder-tree ul li{*/
+     /*list-style-type: none;*/
+ /*}*/
+
+/*#folder-tree ul > li:before {*/
+    /*content: "";*/
+    /*background: url('../image/folder.png') no-repeat;*/
+    /*display: inline-block;*/
+    /*height: 29px;*/
+    /*width: 32px;*/
+    /*cursor: pointer;*/
+/*}*/
+
+ /*#folder-tree ul > li > ul > li {*/
+     /*border-left: 1px solid #666;*/
+ /*}*/
+
+
+ #folder-tree ul > li > ul{
+     padding-left: 6px;
+ }
+
+ #folder-tree .contain li {
+     list-style-type: none;
+ }
+
+ .node {
+     background-image: url(../image/i.gif);
+     background-position: top left;
+     background-repeat: repeat-y;
+     margin-left: 18px;
+     zoom: 1;
+ }
+
+ .is_root {
+     margin-left: 0;
+ }
+
+ .is_last {
+     background-image: url(../image/i_half.gif);
+     background-repeat: no-repeat;
+ }
+
+ .e_open .expand {
+     background-image: url(../image/expand_minus.gif);
+ }
+
+ .e_closed .expand {
+     background-image: url(../image/expand_plus.gif);
+ }
+
+ .e_leaf .expand {
+     background-image: url(../image/expand_leaf.gif);
+ }
+
+ .content {
+     min-height: 18px;
+     /*margin-left: 18px;*/
+     font-size: 12px;
+ }
+
+ .content:before {
+     content: "";
+     background: url('../image/folder.png') no-repeat;
+     display: inline-block;
+     height: 29px;
+     width: 32px;
+     cursor: pointer;
+     margin-right: 4px;
+ }
+
+ .expand {
+     width: 18px;
+     height: 18px;
+     float: left;
+ }
+
+ .e_open .contain {
+     display: block;
+ }
+
+ .e_closed .contain {
+     display: none;
+ }
+
+ .e_open .expand, .e_closed .expand {
+     cursor: pointer;
+ }
+
+ .e_leaf .expand {
+     cursor: auto;
+ }

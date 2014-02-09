@@ -1,4 +1,4 @@
-var Game = Backbone.Model.extend({
+var Folder = Backbone.Model.extend({
     initialize: function(){
     },
     defaults: {
@@ -11,77 +11,100 @@ var Game = Backbone.Model.extend({
     }
 });
 
-var GamesCollection = Backbone.Collection.extend({
-    model : Game,
-    localStorage: new Store("todos-backbone"),
+var FolderCollection = Backbone.Collection.extend({
+    model : Folder,
+    localStorage: new Store("folders-list"),
     initialize : function(){
-        for ( item in window.collectionItem ){
-            this.add( new Game(window.collectionItem[item]));
+        for ( item in window.foldersCollection ){
+            this.add( new Folder(window.foldersCollection[item]));
         }
     }
 });
 
-var GameView = Backbone.View.extend({
+var FolderView = Backbone.View.extend({
     tagName:'ul',
+    className: 'contain',
     initialize:function () {
-        //this.model.bind("reset", this.render, this);
+
     },
 
     render:function (eventName) {
-        $(this.el).append(new GameItemView({model:new Game, collection: this.model.models}).render());
+        $(this.el).append(new FolderItemView({model:new Folder, collection: this.model.models}).render());
         return this;
     }
 });
 
-var GameItemView = Backbone.View.extend({
+var FolderItemView = Backbone.View.extend({
     template: _.template($('#item-template').html()),
     events: {
-        'click': 'eClick'
-    },
 
+    },
     render : function() {
         var oModel = this.model;
         var oCollection = this.collection;
 
-        console.log(oCollection);
-
         oModel.set('subitem', '');
+
+        var subitemsCount = 0;
         _.each(oCollection, function(item){
             if ( oModel.get('folder_id') == item.get('parent_id')) {
-                oModel.set('subitem', oModel.get('subitem') + new GameItemView({model:item, collection: oCollection}).render());
+                subitemsCount++;
             }
         });
 
+        if (subitemsCount) {
+            var counter = 1;
+            _.each(oCollection, function(item){
+                if (oModel.get('is_last') == undefined) {
+                    oModel.set('is_last', true);
+                }
+                if ( oModel.get('folder_id') == item.get('parent_id')) {
+                    if (counter == subitemsCount) {
+                        item.set('is_last', true);
+                    } else {
+                        item.set('is_last', false);
+                    }
+
+                    counter++;
+                    oModel.set('subitem', oModel.get('subitem') + new FolderItemView({ model:item, collection: oCollection }).render());
+                }
+            });
+        }
+
         return this.template(oModel.toJSON());
-    },
-
-    eClick: function() {
-
     }
 });
 
 var AppRouter = Backbone.Router.extend({
     routes:{
-        "":"list"
+        '':'list',
+        'item/:id':'item'
     },
     list:function () {
-        this.itemList = new GamesCollection();
-        this.itemListView = new GameView({model:this.itemList});
-        $('#game').html(this.itemListView.render().el);
+        this.itemList = new FolderCollection();
+        this.itemListView = new FolderView    ({model:this.itemList});
+        $('#folder-tree').html(this.itemListView.render().el);
+    },
+    item:function() {
+
     }
 });
 
+
+/**
+* init actions
+*/
 jQuery(document).ready(function(){
     $.ajax({
         url: "api/bookmark"
     }).success(function( response ) {
-            window.collectionItem = jQuery.parseJSON(response);
+            window.foldersCollection = jQuery.parseJSON(response);
             var app = new AppRouter();
             Backbone.history.start();
-    });
 
-   jQuery('#game').on('click', 'span.name', function(event){
-       element = event.target;
-       jQuery(jQuery('ul', $(element).parent())[0]).toggle();
-   });
+            $('#folder-tree .expand').click(function(){
+                var element = $(this);
+                $('ul.contain', element.parent()).toggle();
+            });
+    });
 });

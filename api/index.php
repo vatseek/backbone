@@ -6,12 +6,12 @@ $app = new Slim();
 $app->get('/bookmark', 'getBookmarks');
 $app->get('/files', 'getFiles');
 
-$app->get('/wines', 'getWines');
-$app->get('/wines/:id',	'getWine');
-$app->get('/wines/search/:query', 'findByName');
-$app->post('/wines', 'addWine');
-$app->put('/wines/:id', 'updateWine');
-$app->delete('/wines/:id',	'deleteWine');
+//$app->get('/wines', 'getWines');
+//$app->get('/wines/:id',	'getWine');
+//$app->get('/wines/search/:query', 'findByName');
+//$app->post('/wines', 'addWine');
+//$app->put('/wines/:id', 'updateWine');
+//$app->delete('/wines/:id',	'deleteWine');
 
 $app->run();
 
