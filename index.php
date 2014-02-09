@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -106,42 +105,3 @@
 
 </body>
 </html>
-
-<?php /* ?>
-<ul class="contain">
-    <li class="node is_root e_open">
-        <div class="expand"></div>
-        <a class="content" href="#">test</a>
-        <ul class="contain">
-            <li class="node e_open">
-                <div class="expand"></div>
-                <a class="content" href="#">test</a>
-                <ul class="contain">
-                    <li class="node e_leaf is_last">
-                        <div class="expand"></div>
-                        <a class="content" href="#">test</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="node e_leaf is_last">
-                <div class="expand"></div>
-                <a class="content" href="#">test</a>
-            </li>
-        </ul>
-    </li>
-    <li class="node is_root e_open is_last">
-        <div class="expand"></div>
-        <a class="content" href="#">test</a>
-        <ul class="contain">
-            <li class="node e_leaf">
-                <div class="expand"></div>
-                <a class="content" href="#">test</a>
-            </li>
-            <li class="node e_leaf is_last">
-                <div class="expand"></div>
-                <a class="content" href="#">test</a>
-            </li>
-        </ul>
-    </li>
-</ul>
- <?php */ ?>
