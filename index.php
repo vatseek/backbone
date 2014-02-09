@@ -92,7 +92,7 @@
 <script type="text/template" id="item-template">
     <li class="node e_open <% if(is_last){ %>is_last<% } %> <% if(!subitem.length){ %>e_leaf<% } %>">
         <div class="expand"></div>
-        <a class="content" href"#item/<%= folder_id %>"><%= name %></a>
+        <a class="content" href="#item/<%= folder_id %>"><%= name %></a>
         <% if(subitem){ %>
             <ul class="contain"><%=subitem %></ul>
         <% } %>
