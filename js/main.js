@@ -13,7 +13,7 @@ var Folder = Backbone.Model.extend({
 
 var FolderCollection = Backbone.Collection.extend({
     model : Folder,
-    localStorage: new Store("folders-list"),
+//    localStorage: new Store("folders-list"),
     initialize : function(){
         for ( item in window.foldersCollection ){
             this.add( new Folder(window.foldersCollection[item]));
@@ -69,9 +69,46 @@ var FolderItemView = Backbone.View.extend({
                     oModel.set('subitem', oModel.get('subitem') + new FolderItemView({ model:item, collection: oCollection }).render());
                 }
             });
+        } else {
+            oModel.set('subitem', false);
         }
 
         return this.template(oModel.toJSON());
+    }
+});
+
+var Item = Backbone.Model.extend({
+    defaults: {
+        folder_id: "0",
+        name: "root",
+        order: "0",
+        parent_id: "0",
+        thumb: "folder.png",
+        user_id: "0"
+    }
+});
+
+var ItemCollection = Backbone.Collection.extend({
+    model : Item,
+    url: "api/folder/1",
+    initialize: function(id){
+        this.url = "api/folder/" + id;
+    }
+});
+
+var ItemView = Backbone.View.extend({
+    template: _.template($('#item-list-template').html()),
+    tagName:'ul',
+    events: { },
+    initialize:function () { },
+    render:function (eventName) {
+        var template = this.template;
+        var data = '';
+        _.each(this.model.models, function(item){
+            data += template(item.toJSON());
+        });
+
+        return data;
     }
 });
 
@@ -81,12 +118,21 @@ var AppRouter = Backbone.Router.extend({
         'item/:id':'item'
     },
     list:function () {
-        this.itemList = new FolderCollection();
-        this.itemListView = new FolderView    ({model:this.itemList});
-        $('#folder-tree').html(this.itemListView.render().el);
+        this.buildTree();
     },
-    item:function() {
+    item:function(id) {
+        this.buildTree();
 
+        var itemId = parseInt(id);
+        var model = new ItemCollection(itemId);
+        model.fetch({success: function() {
+            $('#content-item').html( new ItemView({model: model }).render());
+        }});
+    },
+    buildTree:function(){
+        this.itemList = new FolderCollection();
+        this.itemListView = new FolderView({model:this.itemList});
+        $('#folder-tree').html(this.itemListView.render().el);
     }
 });
 

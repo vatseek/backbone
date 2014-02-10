@@ -4,14 +4,7 @@ require 'Slim/Slim.php';
 $app = new Slim();
 
 $app->get('/bookmark', 'getBookmarks');
-$app->get('/files', 'getFiles');
-
-//$app->get('/wines', 'getWines');
-//$app->get('/wines/:id',	'getWine');
-//$app->get('/wines/search/:query', 'findByName');
-//$app->post('/wines', 'addWine');
-//$app->put('/wines/:id', 'updateWine');
-//$app->delete('/wines/:id',	'deleteWine');
+$app->get('/folder/:id', 'getFolders');
 
 $app->run();
 
@@ -19,6 +12,20 @@ $app->run();
 function getBookmarks()
 {
     $sql = "select * FROM `folder` WHERE user_id = '0'; ";
+    try {
+        $db = getConnection();
+        $stmt = $db->query($sql);
+        $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $db = null;
+        echo json_encode($items);
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function getFolders($folderId)
+{
+    $sql = "select * FROM `folder` WHERE user_id = '0' AND parent_id = '{$folderId}';";
     try {
         $db = getConnection();
         $stmt = $db->query($sql);
@@ -39,4 +46,3 @@ function getConnection() {
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $dbh;
 }
-?>

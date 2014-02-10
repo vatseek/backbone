@@ -12,11 +12,6 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="offcanvas.css" rel="stylesheet">
-
-
     <link rel="stylesheet" href="/css/styles.css" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -56,7 +51,7 @@
             </div>
         </div><!--/span-->
         <div class="col-xs-12 col-sm-8">
-            <div class="row">
+            <div class="row" id="content-item">
                 <div class="col-6 col-sm-6 col-lg-4">
                     <h2>Heading</h2>
                     <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
@@ -85,8 +80,6 @@
 </div><!--/.container-->
 
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="dist/js/bootstrap.min.js"></script>
-<script src="offcanvas.js"></script>
 
 <script type="text/template" id="item-template">
     <li class="node e_open <% if(is_last){ %>is_last<% } %> <% if(!subitem.length){ %>e_leaf<% } %>">
@@ -98,9 +91,15 @@
     </li>
 </script>
 
+<script type="text/template" id="item-list-template">
+    <li>   asdas
+        <%= folder_id %>
+    </li>
+</script>
+
 <script src="lib/underscore-min.js"></script>
 <script src="lib/backbone-min.js"></script>
-<script src="lib/backbone-localstorage.js"></script>
+<!--<script src="lib/backbone-localstorage.js"></script>-->
 <script src="js/main.js"></script>
 
 </body>
